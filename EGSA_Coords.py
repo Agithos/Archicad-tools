@@ -144,11 +144,12 @@ def printNumbers(x, add=0):
     for i in range(len(x)):
         print(i+1+add)
 
-x = []
-y = []
-groupOrigin = findCoords(gdl)
-findVerts(gdl,groupOrigin,x,y)
+if __name__ == '__main__':
+    x = []
+    y = []
+    groupOrigin = findCoords(gdl)
+    findVerts(gdl,groupOrigin,x,y)
 
-graph = findEdges(gdl)
-print(graph)
-printTable(x,y,graph)
+    graph = findEdges(gdl)
+    print(graph)
+    printTable(x,y,graph)

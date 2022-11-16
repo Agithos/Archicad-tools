@@ -1,16 +1,4 @@
 from archicad import ACConnection
-conn = ACConnection.connect()
-assert conn
-
-acc = conn.commands
-act = conn.types
-acu = conn.utilities
-
-zones = acc.GetElementsByType('Zone')
-zones2 = zones[17:]
-
-
-
 
 # Pairnei lista apo elem-Zones kai allazei Onoma
 # Kanei print ta letters pou xrisimopoiei
@@ -55,9 +43,20 @@ def printNodes(nodeArray):
     for node in nodeArray:
         print(node)
 
-myArray = []
-# changeNumber(zones[:17], letters=True, shiftNode=-1, array=myArray, starNode = posa proigithikan)
-changeNumber(zones2,startNode=17, letters=True, array=myArray)
+if __name__ == '__main__':
+    conn = ACConnection.connect()
+    assert conn
+
+    acc = conn.commands
+    act = conn.types
+    acu = conn.utilities
+
+    zones = acc.GetElementsByType('Zone')
+    zones2 = zones[17:]
+
+    myArray = []
+    # changeNumber(zones[:17], letters=True, shiftNode=-1, array=myArray, starNode = posa proigithikan)
+    changeNumber(zones2,startNode=17, letters=True, array=myArray)
 
 
-printNodes(myArray)
+    printNodes(myArray)

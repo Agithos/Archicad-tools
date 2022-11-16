@@ -1,3 +1,4 @@
 *.gdl
-test.py
+test*.py
 examples
+__pycache__/
