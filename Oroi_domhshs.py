@@ -1,22 +1,20 @@
 from helpers.fek import fek
 import re
 
-# printFek("yp")
-
 class Xwros:
-    xwroi = []
+    xwroi = {}
     def __init__(self, name, calcString, xwros=None):
         self.name = name
         self.calcString = calcString
         self.xwros = xwros
         self.emvado = None
         self.canCalculate = False
-        self.dependancies = None
-        Xwros.xwroi.append(self)
+        self.dependancies = []
+        Xwros.xwroi[self.name] = self
 
         # Vriskei xwrous - metavlhtes
-        regexPattern = r"[A-zΑ-ω][\d.Α-ω]+"
-        matches = re.findall(regexPattern, self.calcString)
+        self.regexPattern = r"[A-zΑ-ω]+[\d.Α-ω]+"
+        matches = re.findall(self.regexPattern, self.calcString)
         self.dependancies = matches
 
     
@@ -25,7 +23,7 @@ class Xwros:
             return True
         if not self.dependancies:
             self.canCalculate = True
-            self.emvado = self.calculate()
+            self.calculate()
             return True
         else: 
             self.dependanciesValues = []
@@ -36,20 +34,28 @@ class Xwros:
                     return False
                 else:
                     dependancy = Xwros.xwroi[i]
-                    dependancy.findCalculationDependencies()
+                    print(dependancy)
+                    dependancy.findCalculationDependancies()
                     if dependancy.canCalculate:
                         self.dependanciesValues.append(dependancy.emvado)
                     else:
                         return False
             self.canCalculate = True
-            self.emvado = self.calculate()
+            self.calculate()
 
     def calculate(self):
-        emvado = None
-        return emvado
+        # replace dependancies with their values
+        editedString = self.calcString
+
+        if self.dependancies:
+            for i in range(len(self.dependancies)):
+                print(self.dependancies[i],self.dependanciesValues[i])
+                editedString = re.sub(self.regexPattern, self.dependanciesValues[i], editedString)
+        self.calcString = editedString
+        self.emvado = eval(self.calcString)
 
     def prettyPrintCalc(self):
-        
+        pass
 
     def printCalc(self):
         print(self.calcString)
@@ -78,14 +84,15 @@ class Pinakida:
         self.ktirio = ktirio
     def emvadaOla(self):
 
-        self.epimerousEmvada(eArray)
-        self.domhsh(dArray)
-    
+        # self.epimerousEmvada(eArray)
+        # self.domhsh(dArray)
+        pass
     def epimerousEmvada(self, eArray):
         # vriskw tous xwrous pou den einai D
-
+        pass
     def domhsh(self, dArray):
         #vriskw tous xwrous pou einai D
+        pass
 
     def logizomeni_domhsh(self):
         # copy twn xwrwn
@@ -96,5 +103,8 @@ class Pinakida:
         pass
 
 
-x = Xwros("aefaef", "9.2", xwros="yp")
-x.printFek()
+x = Xwros("e12", "9.2", xwros="yp")
+a = Xwros("e13", "9,5 + e12")
+b = Xwros("e14", "10*e13")
+
+b.findCalculationDependancies()
