@@ -7,3 +7,7 @@ archicad external scripts
 - Όψη hmax object
   - γραμμή διάστασης hmax με 2 στάθμες. Hotspot
   - Παίρνει σχετικές διαστάσεις
+
+- ΕΓΣΑ coords
+  - Να κάνει clock-wise, anti-clock-wise
+  - Shift 
